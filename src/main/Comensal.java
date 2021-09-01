@@ -1,10 +1,12 @@
 package main;
 
+import java.util.Random;
+
 public class Comensal extends Thread {
 
 	public static Mesa mesa;
 
-	public  static Fregadero fregadero;
+	public static Fregadero fregadero;
 
 	private int plato;
 
@@ -15,6 +17,18 @@ public class Comensal extends Thread {
 
 	public void comer()
 	{
+		Random r = new Random();
+		double randomValue = 1 + (3 - 1) * r.nextDouble();
+		
+		try
+		{
+			sleep((long) randomValue*1000);
+		}
+		catch(Exception e)
+		{
+			
+		}
+		
 		plato++;		
 	}
 
@@ -24,8 +38,7 @@ public class Comensal extends Thread {
 		{
 			mesa.tomarCubierto();
 			comer();
-			fregadero.meterCubiertoT1();
-			fregadero.meterCubiertoT2();
+			fregadero.meterCubiertos();
 		}
 	}
 }

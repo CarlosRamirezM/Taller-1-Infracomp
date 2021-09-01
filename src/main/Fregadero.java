@@ -4,47 +4,28 @@ public class Fregadero {
 
 	private int tamanio;
 
-	private int cantidadT1;
-
-	private int cantidadT2;
+	private int cantidad;	
 
 	public Fregadero(int tamanio)
 	{
-		this.tamanio = tamanio;
-		cantidadT1 = 0;
-		cantidadT2 = 0; 
+		this.tamanio = tamanio;		
 	}
 
-	public synchronized void meterCubiertoT1()
+	public synchronized void meterCubiertos()
 	{
-		try {
-
-			if(cantidadT1 + cantidadT2 == tamanio)
-			{
-				wait();
-			}
-			cantidadT1++;
-		}
-		catch(Exception e)
+		while(cantidad == tamanio)
 		{
-
+			Thread.yield();
 		}
+		cantidad++;
 	}
 
-	public synchronized void meterCubiertoT2()
+	public synchronized void tomarCubiertos()
 	{
-		try {
-
-			if(cantidadT1 + cantidadT2 == tamanio)
-			{
-				wait();
-			}
-			cantidadT2++;
-		}
-		catch(Exception e)
+		while(cantidad == 0)
 		{
-
+			Thread.yield();
 		}
+		cantidad--;
 	}
-
 }

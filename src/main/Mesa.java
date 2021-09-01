@@ -49,6 +49,12 @@ public class Mesa {
 		}
 	}	
 	
+	public synchronized void ponerCubiertos()
+	{
+		numCubiertosT1++;
+		numCubiertosT2++;
+	}
+	
 	
 	public int getNumPlatos()
 	{

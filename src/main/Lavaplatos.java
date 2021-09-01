@@ -1,13 +1,44 @@
 package main;
 
+import java.util.Random;
+
 public class Lavaplatos extends Thread {
 
-	private static Mesa mesa;
+	public static Mesa mesa;
 
-	private static Fregadero fregadero;
+	public static Fregadero fregadero;	
 
-	public Lavaplatos(Mesa mesa, Fregadero fregadero) {
-		this.mesa = mesa;
-		this.fregadero = fregadero;
+	public Lavaplatos() {
+	}
+	
+	public void run() {
+
+		while(true)
+		{
+			fregadero.tomarCubiertos();
+			this.lavarCubiertos();	
+			mesa.ponerCubiertos();
+		}
+	}
+	
+	public void lavarCubiertos()
+	{
+		Random r = new Random();
+
+		try
+		{
+			if(r.nextBoolean())
+			{
+				sleep(1000);
+			}
+			else
+			{
+				sleep(2000);
+			}
+		}
+		catch(Exception e)
+		{
+
+		}
 	}
 }
