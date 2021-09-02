@@ -60,4 +60,9 @@ public class Mesa {
 	{
 		return numPlatos;
 	}
+	
+	public int getMitadNumPlatos()
+	{
+		return mitadNumPlatos;
+	}
 }

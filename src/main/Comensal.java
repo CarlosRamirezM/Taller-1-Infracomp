@@ -1,16 +1,23 @@
 package main;
 
 import java.util.Random;
+import java.util.concurrent.CyclicBarrier;
 
 public class Comensal extends Thread {
 
+	private int id; 
+	
 	public static Mesa mesa;
 
 	public static Fregadero fregadero;
 
+	public static CyclicBarrier barrera;
+
 	private int plato;
 
-	public Comensal() {		
+	public Comensal(int id)
+	{	
+		this.id = id;
 		plato = 0;
 	}
 
@@ -18,17 +25,17 @@ public class Comensal extends Thread {
 	public void comer()
 	{
 		Random r = new Random();
-		double randomValue = 1 + (3 - 1) * r.nextDouble();
-		
+		double randomValue = 1 + (2.01) * r.nextDouble();
+
 		try
 		{
 			sleep((long) randomValue*1000);
 		}
 		catch(Exception e)
 		{
-			
+
 		}
-		
+
 		plato++;		
 	}
 
@@ -39,6 +46,17 @@ public class Comensal extends Thread {
 			mesa.tomarCubierto();
 			comer();
 			fregadero.meterCubiertos();
+
+			if(this.plato == mesa.getMitadNumPlatos())
+			{
+				try 
+				{
+					barrera.await();
+				} 
+				catch (Exception e) 
+				{	
+				} 
+			}
 		}
 	}
 }
