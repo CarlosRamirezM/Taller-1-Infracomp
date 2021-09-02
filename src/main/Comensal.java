@@ -26,7 +26,9 @@ public class Comensal extends Thread {
 	{
 		Random r = new Random();
 		double randomValue = 1 + (2.01) * r.nextDouble();
-
+		
+		System.out.println("Comensal " + this.id + " durará " + randomValue + " segundos comiendo.");
+		
 		try
 		{			
 			sleep((long) randomValue*1000);
@@ -56,6 +58,12 @@ public class Comensal extends Thread {
 				try 
 				{
 					System.out.println("Comensal " + this.id + " llegó a la mitad de los platos, esperando...");
+					
+					if(barrera.getNumberWaiting() == ( barrera.getParties() - 1 ))
+					{
+						System.out.println("El último comensal ("+this.id+") va a llegar a la mitad de los platos.");
+					}
+					
 					barrera.await();
 				} 
 				catch (Exception e) 

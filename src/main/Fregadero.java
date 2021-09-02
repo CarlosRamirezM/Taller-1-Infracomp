@@ -9,25 +9,30 @@ public class Fregadero {
 	public Fregadero(int tamanio)
 	{
 		this.tamanio = tamanio;		
+		this.cantidad = 0;
 	}
 
-	public synchronized void meterCubiertos(int id)
+	public void meterCubiertos(int id)
 	{
 		while(cantidad == tamanio)
-		{
-			System.out.println("Comensal " + id + " no pudo dejar los cubiertos en el fregadero, esperando.");
+		{			
 			Thread.yield();
 		}
-		cantidad++;
+
+		synchronized(this) {
+			cantidad++;
+		}
 	}
 
-	public synchronized void tomarCubiertos()
+	public void tomarCubiertos()
 	{
 		while(cantidad == 0)
-		{
-			System.out.println("El lavaplatos no pudo tomar los cubiertos del fregadero, esperando.");
+		{			
 			Thread.yield();
+		}			
+
+		synchronized(this) {
+			cantidad--;
 		}
-		cantidad--;
 	}
 }

@@ -9,7 +9,7 @@ public class Main {
 	
 	public static void main(String[] args)
 	{
-		try(InputStream input = new FileInputStream("../resources/config.properties"))
+		try(InputStream input = new FileInputStream("src/resources/config.properties"))
 		{
 			 Properties prop = new Properties();
 			 
@@ -20,6 +20,9 @@ public class Main {
 			 int numPlatos = Integer.parseInt(prop.getProperty("concurrencia.numPlatos"));
 			 int tamFregadero = Integer.parseInt(prop.getProperty("concurrencia.tamFregadero"));
 			 int numComensales = Integer.parseInt(prop.getProperty("concurrencia.numComensales"));
+			 
+			 System.out.println("Valores ingresados: numCubiertosT1=" + numCubiertosT1 + " numCubiertosT2="+numCubiertosT2
+					             +" numPlatos="+numPlatos+" tamFregadero="+tamFregadero+" numComensales="+numComensales);
 			 
 			 Mesa mesa = new Mesa( numCubiertosT1, numCubiertosT2, numPlatos);
 			 Fregadero fregadero = new Fregadero(tamFregadero);
