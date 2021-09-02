@@ -40,8 +40,7 @@ public class Main {
 			 {
 				 Comensal comensal = new Comensal(i);
 				 comensal.start();
-			 }
-			 
+			 }			 
 		}
 		catch(Exception e)
 		{

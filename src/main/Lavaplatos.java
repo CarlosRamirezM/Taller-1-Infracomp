@@ -15,9 +15,13 @@ public class Lavaplatos extends Thread {
 
 		while(true)
 		{
+			System.out.println("El lavaplatos va a tomar un par de cubiertos del fragadero.");
 			fregadero.tomarCubiertos();
-			this.lavarCubiertos();	
+			System.out.println("El lavaplatos tomó un par de cubiertos y va a lavarlos.");
+			this.lavarCubiertos();
+			System.out.println("El lavaplatos lavó un par de cubiertos, va a dejarlos en la mesa.");
 			mesa.ponerCubiertos();
+			System.out.println("El lavaplatos dejó un par de cubiertos en la mesa.");
 		}
 	}
 	

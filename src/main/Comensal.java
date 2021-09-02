@@ -28,7 +28,7 @@ public class Comensal extends Thread {
 		double randomValue = 1 + (2.01) * r.nextDouble();
 
 		try
-		{
+		{			
 			sleep((long) randomValue*1000);
 		}
 		catch(Exception e)
@@ -43,20 +43,25 @@ public class Comensal extends Thread {
 
 		while(this.plato < mesa.getNumPlatos())
 		{
-			mesa.tomarCubierto();
+			System.out.println("Comensal " + this.id + " tomando cubiertos para el plato " + (this.plato + 1) );
+			mesa.tomarCubierto(this.id);
+			System.out.println("Comensal " + this.id + " tomó cubiertos, empezando a comer.");
 			comer();
-			fregadero.meterCubiertos();
+			System.out.println("Comensal " + this.id + " comió, intentando dejar cubiertos en el fregadero.");
+			fregadero.meterCubiertos(this.id);
+			System.out.println("Comensal " + this.id + " dejó los cubiertos.");
 
 			if(this.plato == mesa.getMitadNumPlatos())
 			{
 				try 
 				{
+					System.out.println("Comensal " + this.id + " llegó a la mitad de los platos, esperando...");
 					barrera.await();
 				} 
 				catch (Exception e) 
 				{	
 				} 
-			}
+			}			
 		}
 	}
 }
