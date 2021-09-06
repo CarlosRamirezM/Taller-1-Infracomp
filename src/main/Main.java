@@ -35,6 +35,7 @@ public class Main {
 			 Lavaplatos.fregadero = fregadero;
 			 
 			 Comensal.barrera = barrera;
+			 Fregadero.totalPlatos = numComensales*numPlatos;
 			 
 			 Lavaplatos lavaplatos = new Lavaplatos();
 			 lavaplatos.start();

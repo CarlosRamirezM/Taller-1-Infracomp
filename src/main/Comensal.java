@@ -6,7 +6,7 @@ import java.util.concurrent.CyclicBarrier;
 public class Comensal extends Thread {
 
 	private int id; 
-	
+
 	public static Mesa mesa;
 
 	public static Fregadero fregadero;
@@ -26,9 +26,9 @@ public class Comensal extends Thread {
 	{
 		Random r = new Random();
 		double randomValue = 1 + (2.01) * r.nextDouble();
-		
+
 		System.out.println("Comensal " + this.id + " durará " + randomValue + " segundos comiendo.");
-		
+
 		try
 		{			
 			sleep((long) randomValue*1000);
@@ -38,7 +38,9 @@ public class Comensal extends Thread {
 
 		}
 
-		plato++;		
+		plato++;
+		fregadero.platoComido();
+		System.out.println("Quedan " + Fregadero.totalPlatos + " platos.");
 	}
 
 	public void run() {
@@ -58,18 +60,38 @@ public class Comensal extends Thread {
 				try 
 				{
 					System.out.println("Comensal " + this.id + " llegó a la mitad de los platos, esperando...");
-					
+
 					if(barrera.getNumberWaiting() == ( barrera.getParties() - 1 ))
 					{
 						System.out.println("El último comensal ("+this.id+") va a llegar a la mitad de los platos.");
 					}
-					
+
 					barrera.await();
 				} 
 				catch (Exception e) 
 				{	
 				} 
-			}			
+			}
+			if(this.plato == mesa.getNumPlatos())
+			{
+				try 
+				{
+					System.out.println("Comensal " + this.id + " llegó al a mitad de los platos, esperando...");
+
+					if(barrera.getNumberWaiting() == ( barrera.getParties() - 1 ))
+					{
+						System.out.println("El último comensal ("+this.id+") va a llegar a la mitad de los platos.");
+					}
+
+					barrera.await();
+				} 
+				catch (Exception e) 
+				{	
+				} 
+			}
+			if ( Fregadero.totalPlatos == 0 ) {
+				fregadero.notificarTerminacion();
+			}
 		}
 	}
 }
