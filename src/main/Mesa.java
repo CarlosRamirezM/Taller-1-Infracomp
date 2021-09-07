@@ -25,17 +25,17 @@ public class Mesa {
 			if(numCubiertosT1 > 0)
 			{
 				numCubiertosT1--;
-				System.out.println("Comensal " + id + " tomó el cubierto T1.");
+				System.out.println("Comensal " + id + " tomÃ³ el cubierto T1.");
 
 				if(numCubiertosT2 > 0)
 				{
 					numCubiertosT2--;
-					System.out.println("Comensal " + id + " tomó el cubierto T2.");
+					System.out.println("Comensal " + id + " tomÃ³ el cubierto T2.");
 				}
 				else
 				{
 					numCubiertosT1++;
-					System.out.println("Comensal " + id + " devolvió cubierto T1, no pudo tomar el T2");
+					System.out.println("Comensal " + id + " devolviÃ³ cubierto T1, no pudo tomar el T2");
 					wait();
 					tomarCubierto(id);
 				}
@@ -57,7 +57,7 @@ public class Mesa {
 	{
 		numCubiertosT1++;
 		numCubiertosT2++;
-		System.out.println("El lavaplatos dejó los cubiertos en la mesa.");
+		System.out.println("El lavaplatos dejÃ³ los cubiertos en la mesa.");
 		notifyAll();
 	}
 	

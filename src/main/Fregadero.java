@@ -7,15 +7,12 @@ public class Fregadero {
 
 	private int cantidad;
 	
-	private boolean terminado;
-	
 	public static int totalPlatos;
 
 	public Fregadero(int tamanio)
 	{
 		this.tamanio = tamanio;		
 		this.cantidad = 0;
-		terminado = false;
 	}
 
 	public  void meterCubiertos(int id)
@@ -43,12 +40,8 @@ public class Fregadero {
 		}
 	}
 	
-	public void notificarTerminacion() {
-		terminado = true;		
-	}
-	
 	public boolean terminacion() {
-		return ( terminado && cantidad == 0) ? true: false;
+		return ( totalPlatos == 0 && cantidad == 0) ? true: false;
 	}
 	
 	public synchronized void platoComido()
