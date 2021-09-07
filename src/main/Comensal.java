@@ -27,7 +27,7 @@ public class Comensal extends Thread {
 		Random r = new Random();
 		double randomValue = 1 + (2.01) * r.nextDouble();
 
-		System.out.println("Comensal " + this.id + " durará " + randomValue + " segundos comiendo.");
+		System.out.println("Comensal " + this.id + " durarï¿½ " + randomValue + " segundos comiendo.");
 
 		try
 		{			
@@ -49,21 +49,21 @@ public class Comensal extends Thread {
 		{
 			System.out.println("Comensal " + this.id + " tomando cubiertos para el plato " + (this.plato + 1) );
 			mesa.tomarCubierto(this.id);
-			System.out.println("Comensal " + this.id + " tomó cubiertos, empezando a comer.");
+			System.out.println("Comensal " + this.id + " tomï¿½ cubiertos, empezando a comer.");
 			comer();
-			System.out.println("Comensal " + this.id + " comió, intentando dejar cubiertos en el fregadero.");
+			System.out.println("Comensal " + this.id + " comiï¿½, intentando dejar cubiertos en el fregadero.");
 			fregadero.meterCubiertos(this.id);
-			System.out.println("Comensal " + this.id + " dejó los cubiertos.");
+			System.out.println("Comensal " + this.id + " dejï¿½ los cubiertos.");
 
 			if(this.plato == mesa.getMitadNumPlatos())
 			{
 				try 
 				{
-					System.out.println("Comensal " + this.id + " llegó a la mitad de los platos, esperando...");
+					System.out.println("Comensal " + this.id + " llegï¿½ a la mitad de los platos, esperando...");
 
 					if(barrera.getNumberWaiting() == ( barrera.getParties() - 1 ))
 					{
-						System.out.println("El último comensal ("+this.id+") va a llegar a la mitad de los platos.");
+						System.out.println("El ï¿½ltimo comensal ("+this.id+") va a llegar a la mitad de los platos.");
 					}
 
 					barrera.await();
@@ -71,24 +71,7 @@ public class Comensal extends Thread {
 				catch (Exception e) 
 				{	
 				} 
-			}
-			if(this.plato == mesa.getNumPlatos())
-			{
-				try 
-				{
-					System.out.println("Comensal " + this.id + " llegó al a mitad de los platos, esperando...");
-
-					if(barrera.getNumberWaiting() == ( barrera.getParties() - 1 ))
-					{
-						System.out.println("El último comensal ("+this.id+") va a llegar a la mitad de los platos.");
-					}
-
-					barrera.await();
-				} 
-				catch (Exception e) 
-				{	
-				} 
-			}
+			}			
 			if ( Fregadero.totalPlatos == 0 ) {
 				fregadero.notificarTerminacion();
 			}
