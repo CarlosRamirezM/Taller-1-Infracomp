@@ -21,59 +21,61 @@ public class Comensal extends Thread {
 		plato = 0;
 	}
 
-
+	/**
+	 * Método que duerme el Comensal mientras come su plato
+	 */
 	public void comer()
 	{
 		Random r = new Random();
-		double randomValue = 1 + (2.01) * r.nextDouble();
+		//Genera un tiempo aleatorio entre 3 y 5
+		double randomValue = 3 + (2.01) * r.nextDouble();
 
-		System.out.println("Comensal " + this.id + " durar� " + randomValue + " segundos comiendo.");
+		System.out.println("Comensal " + this.id + " durará " + String. format("%.2f", randomValue) + " segundos comiendo.");
 
 		try
 		{			
+			//El thread duerme por el tiempo generado
 			sleep((long) randomValue*1000);
 		}
-		catch(Exception e)
-		{
+		catch(Exception e) {}
 
-		}
-
+		//Aumenta la cantidad de platos comidos por el comensal
 		plato++;
+		//Disminuye la cantidad de platos restantes entre todos los comensales
 		fregadero.platoComido();
 		System.out.println("Quedan " + Fregadero.totalPlatos + " platos.");
 	}
 
+	/**
+	 * Método que se ejecuta con start del Comensal y que se encarga de seguir el protocolo para comer platos
+	 */
 	public void run() {
 
 		while(this.plato < mesa.getNumPlatos())
 		{
 			System.out.println("Comensal " + this.id + " tomando cubiertos para el plato " + (this.plato + 1) );
 			mesa.tomarCubierto(this.id);
-			System.out.println("Comensal " + this.id + " tom� cubiertos, empezando a comer.");
+			System.out.println("Comensal " + this.id + " tomó cubiertos, empezando a comer.");
 			comer();
-			System.out.println("Comensal " + this.id + " comi�, intentando dejar cubiertos en el fregadero.");
-			fregadero.meterCubiertos(this.id);
-			System.out.println("Comensal " + this.id + " dej� los cubiertos.");
+			System.out.println("Comensal " + this.id + " comió, intentando dejar cubiertos en el fregadero.");
+			fregadero.meterCubiertos();
+			System.out.println("Comensal " + this.id + " dejó los cubiertos.");
 
+			//Revisa si ha llegado a la mitad de los platos para esperar mediante una barrera
 			if(this.plato == mesa.getMitadNumPlatos())
 			{
 				try 
 				{
-					System.out.println("Comensal " + this.id + " lleg� a la mitad de los platos, esperando...");
+					System.out.println("Comensal " + this.id + " llegó a la mitad de los platos, esperando...");
 
+					//Si es el último en llegar imprime un mensaje de que va a romper la barrera
 					if(barrera.getNumberWaiting() == ( barrera.getParties() - 1 ))
 					{
-						System.out.println("El �ltimo comensal ("+this.id+") va a llegar a la mitad de los platos.");
+						System.out.println("El último comensal ("+this.id+") va a llegar a la mitad de los platos.");
 					}
-
 					barrera.await();
 				} 
-				catch (Exception e) 
-				{	
-				} 
-			}			
-			if ( Fregadero.totalPlatos == 0 ) {
-				fregadero.notificarTerminacion();
+				catch (Exception e) {} 
 			}
 		}
 	}
